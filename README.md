@@ -62,17 +62,17 @@ graph TD
     style I fill:#742a2a,stroke:#c53030,color:#fff
 
 ```
-What It Does
-Flags Risky Invoices: Uses a Random Forest classifier (93% accuracy) to filter out accounts likely to pay late.
+Core Capabilities
+ML Risk Scoring: Evaluates historical payment behavior using a Random Forest classifier to identify accounts with high probabilities of delay (93% accuracy).
 
-Drafts Custom Follow-Ups: Automatically writes a clear email referencing the exact invoice number, amount due, and payment terms for flagged accounts.
+Context-Aware Email Generation: Dynamically drafts tailored dunning notices referencing specific invoice numbers, outstanding balances, and payment terms.
 
-Human-in-the-Loop Control: Gives finance teams a simple dashboard to double-check risk scores, tweak email text, and hit send.
+Human-in-the-Loop Governance: Provides finance teams with a clean interface to inspect model predictions, edit draft text, and manually trigger dispatches.
 
-Live SMTP Delivery: Connects to an active SMTP server to send emails in real time (routed to a test inbox when working with public datasets without real contact details).
+SMTP Integration: Handles real-time email delivery via standard SMTP protocols, configured with fallback test routing for non-production environments.
 
 Tech Stack
-Backend: Python, FastAPI, Uvicorn
+Backend: Python 3.10+, FastAPI, Uvicorn
 
 ML & Data: Scikit-learn, Pandas, NumPy
 
@@ -84,47 +84,35 @@ Repository Structure
 Plaintext
 autocollect-ai-dunning-engine/
 ├── data/
-│   └── WA_Fn-UseC_-Accounts-Receivable.csv   # Dataset used for training and testing
+│   └── WA_Fn-UseC_-Accounts-Receivable.csv   # Training and evaluation ledger data
 ├── models/
-│   └── stage_1_classifier.pkl                # Risk prediction model
+│   └── stage_1_classifier.pkl                # Serialized Random Forest risk classifier
 ├── notebooks/
-│   ├── exploratory_analysis.ipynb            # Data analysis and model building
-│   └── agent.ipynb                           # Prompt and email testing
+│   ├── exploratory_analysis.ipynb            # Feature engineering & model evaluation
+│   └── agent.ipynb                           # Prompt and email generation tests
 ├── static/
-│   └── index.html                            # Dashboard UI
-├── main.py                                   # FastAPI backend app
-├── pyproject.toml                            # Dependencies
+│   └── index.html                            # Operator dashboard UI
+├── main.py                                   # FastAPI server & application logic
+├── pyproject.toml                            # Dependency configuration
 ├── uv.lock                                   # Lockfile
 └── README.md                                 # Documentation
-How to Run It Locally
-1. Requirements
-Make sure you have Python 3.10+ installed. Using uv is recommended for fast setup.
+Setup & Local Execution
+Prerequisites
+Python 3.10 or higher
 
-2. Setup
-Clone the repository and install dependencies:
+Recommended package manager: uv
 
+1. Installation
 Bash
 git clone [https://github.com/sajesh-nair/autocollect-ai-dunning-engine.git](https://github.com/sajesh-nair/autocollect-ai-dunning-engine.git)
 cd autocollect-ai-dunning-engine
 
-# If using uv
+# Using uv (Recommended)
 uv sync
 
 # Or using pip
 pip install -r requirements.txt
-3. Start the Server
-Run the FastAPI backend:
-
+2. Run Application
 Bash
 uvicorn main:app --reload
-Open your browser and head to http://127.0.0.1:8000 to see the dashboard in action.
-
-
----
-
-### Push Commands:
-
-```bash
-git add README.md
-git commit -m "docs: update readme to reflect single stage classification pipeline"
-git push
+Once running, navigate to http://127.0.0.1:8000 in your browser to access the dashboard.
