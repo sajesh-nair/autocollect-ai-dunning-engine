@@ -52,7 +52,6 @@ graph TD
     style C fill:#1a365d,stroke:#2b6cb0,color:#fff
     style E fill:#22543d,stroke:#38a169,color:#fff
     style I fill:#742a2a,stroke:#c53030,color:#fff
-
 ```
 
 Core Capabilities
