@@ -54,28 +54,29 @@ graph TD
     style I fill:#742a2a,stroke:#c53030,color:#fff
 ```
 
-Core Capabilities
+---
 
-ML Risk Scoring: Evaluates historical payment behavior using a Random Forest classifier to identify accounts with high probabilities of delay (93% accuracy).
+## Core Capabilities
 
-Context-Aware Email Generation: Dynamically drafts tailored dunning notices referencing specific invoice numbers, outstanding balances, and payment terms.
+* **ML Risk Scoring:** Evaluates historical payment behavior using a Random Forest classifier to identify accounts with high probabilities of delay (93% accuracy).
+* **Context-Aware Email Generation:** Dynamically drafts tailored dunning notices referencing specific invoice numbers, outstanding balances, and payment terms.
+* **Human-in-the-Loop Governance:** Provides finance teams with a clean interface to inspect model predictions, edit draft text, and manually trigger dispatches.
+* **SMTP Integration:** Handles real-time email delivery via standard SMTP protocols, configured with fallback test routing for non-production environments.
 
-Human-in-the-Loop Governance: Provides finance teams with a clean interface to inspect model predictions, edit draft text, and manually trigger dispatches.
+---
 
-SMTP Integration: Handles real-time email delivery via standard SMTP protocols, configured with fallback test routing for non-production environments.
+## Tech Stack
 
-Tech Stack
-Backend: Python 3.10+, FastAPI, Uvicorn
+* **Backend:** Python 3.10+, FastAPI, Uvicorn
+* **ML & Data:** Scikit-learn, Pandas, NumPy
+* **Frontend:** HTML5, Tailwind CSS, JavaScript
+* **Tooling:** `uv`, Python Email MIME, SMTP
 
-ML & Data: Scikit-learn, Pandas, NumPy
+---
 
-Frontend: HTML5, Tailwind CSS, JavaScript
+## Repository Structure
 
-Tooling: uv, Python Email MIME, SMTP
-
-
-Repository Structure
-```
+```text
 autocollect-ai-dunning-engine/
 ├── data/
 │   └── WA_Fn-UseC_-Accounts-Receivable.csv   # Training and evaluation ledger data
