@@ -82,7 +82,7 @@ Frontend: HTML5, Tailwind CSS, JavaScript
 Tooling: uv, Python Email MIME, SMTP
 
 Repository Structure
-Plaintext
+```
 autocollect-ai-dunning-engine/
 ├── data/
 │   └── WA_Fn-UseC_-Accounts-Receivable.csv   # Training and evaluation ledger data
@@ -97,10 +97,11 @@ autocollect-ai-dunning-engine/
 ├── pyproject.toml                            # Dependency configuration
 ├── uv.lock                                   # Lockfile
 └── README.md                                 # Documentation
+```
+
 Setup & Local Execution
 Prerequisites
 Python 3.10 or higher
-
 Recommended package manager: uv
 
 1. Installation
