@@ -1,6 +1,6 @@
 # AutoCollect AI — Human-in-the-Loop Dunning & AR Risk Engine
 
-AutoCollect AI connects machine learning credit risk models directly to daily accounts receivable (AR) follow-ups. Instead of blasting clients with generic automated emails that get ignored, AutoCollect uses a 2-stage ML model to catch high-risk invoices and pre-fill personalized email drafts so a human can review and send them in one click.
+AutoCollect AI connects machine learning credit risk models directly to daily accounts receivable (AR) follow-ups. Instead of blasting clients with generic automated emails that get ignored, AutoCollect uses a Random Forest classifier to catch high-risk invoices and pre-fill personalized email drafts so a human can review and send them in one click.
 
 ---
 
@@ -15,40 +15,36 @@ graph TD
 
     %% ML Engine
     subgraph Machine Learning Pipeline
-        B --> C[Stage 1: Random Forest Classifier]
-        C -->|Risk Score & Late Status| D{Risk Threshold Filter}
-        D -->|High Risk Flagged| E[Stage 2: Payment Delay Regressor]
+        B --> C[Random Forest Classifier]
+        C -->|Risk Score & High Risk Flag| D[Contextual Email Draft Generator]
     end
 
     %% Application & Governance
     subgraph Dashboard & HITL
-        E --> F[Tailwind CSS Dashboard]
-        F --> G[Operator Review & Email Edit]
-        G --> H{Operator Decision}
-        H -->|Hold / Skip| I[Logged to Audit Trail]
-        H -->|Approve & Send| J[SMTP Engine]
+        D --> E[Tailwind CSS Dashboard]
+        E --> F[Operator Review & Email Edit]
+        F --> G{Operator Decision}
+        G -->|Hold / Skip| H[Logged to Audit Trail]
+        G -->|Approve & Send| I[SMTP Engine]
     end
 
     %% Execution & Delivery
     subgraph Delivery
-        J --> K[SMTP Server / Test Inbox Routing]
-        K --> L[Real-Time Logs & State Update]
+        I --> J[SMTP Server / Test Inbox Routing]
+        J --> K[Real-Time Logs & State Update]
     end
 
     %% Styling
     style A fill:#2d3748,stroke:#4a5568,color:#fff
     style C fill:#1a365d,stroke:#2b6cb0,color:#fff
-    style E fill:#1a365d,stroke:#2b6cb0,color:#fff
-    style F fill:#22543d,stroke:#38a169,color:#fff
-    style J fill:#742a2a,stroke:#c53030,color:#fff
+    style E fill:#22543d,stroke:#38a169,color:#fff
+    style I fill:#742a2a,stroke:#c53030,color:#fff
 
 ```
 What It Does
-Flags Risky Invoices: Uses a Stage 1 Random Forest classifier (93% accuracy) to filter out accounts likely to pay late.
+Flags Risky Invoices: Uses a Random Forest classifier (93% accuracy) to filter out accounts likely to pay late.
 
-Estimates Delays: Runs a Stage 2 regression model to estimate how many days payment will be delayed so you can prioritize who to contact first.
-
-Drafts Custom Follow-Ups: Automatically writes a clear email referencing the exact invoice number, amount due, and payment terms.
+Drafts Custom Follow-Ups: Automatically writes a clear email referencing the exact invoice number, amount due, and payment terms for flagged accounts.
 
 Human-in-the-Loop Control: Gives finance teams a simple dashboard to double-check risk scores, tweak email text, and hit send.
 
@@ -69,8 +65,7 @@ autocollect-ai-dunning-engine/
 ├── data/
 │   └── WA_Fn-UseC_-Accounts-Receivable.csv   # Dataset used for training and testing
 ├── models/
-│   ├── stage_1_classifier.pkl                # Risk prediction model
-│   └── stage_2_regressor.pkl                 # Payment delay estimator
+│   └── stage_1_classifier.pkl                # Risk prediction model
 ├── notebooks/
 │   ├── exploratory_analysis.ipynb            # Data analysis and model building
 │   └── agent.ipynb                           # Prompt and email testing
@@ -88,7 +83,7 @@ Make sure you have Python 3.10+ installed. Using uv is recommended for fast setu
 Clone the repository and install dependencies:
 
 Bash
-git clone https://github.com/sajesh-nair/autocollect-ai-dunning-engine.git
+git clone [https://github.com/sajesh-nair/autocollect-ai-dunning-engine.git](https://github.com/sajesh-nair/autocollect-ai-dunning-engine.git)
 cd autocollect-ai-dunning-engine
 
 # If using uv
@@ -101,10 +96,14 @@ Run the FastAPI backend:
 
 Bash
 uvicorn main:app --reload
-Open your browser and head to [http://127.0.0.1:8000](http://127.0.0.1:8000) to see the dashboard in action.
+Open your browser and head to http://127.0.0.1:8000 to see the dashboard in action.
 
-Push Commands:
-Bash
+
+---
+
+### Push Commands:
+
+```bash
 git add README.md
-git commit -m "docs: update readme with human written text and architecture"
+git commit -m "docs: update readme to reflect single stage classification pipeline"
 git push
