@@ -66,7 +66,6 @@ Human-in-the-Loop Governance: Provides finance teams with a clean interface to i
 SMTP Integration: Handles real-time email delivery via standard SMTP protocols, configured with fallback test routing for non-production environments.
 
 Tech Stack
-
 Backend: Python 3.10+, FastAPI, Uvicorn
 
 ML & Data: Scikit-learn, Pandas, NumPy
@@ -74,6 +73,7 @@ ML & Data: Scikit-learn, Pandas, NumPy
 Frontend: HTML5, Tailwind CSS, JavaScript
 
 Tooling: uv, Python Email MIME, SMTP
+
 
 Repository Structure
 ```
