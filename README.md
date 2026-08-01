@@ -1,6 +1,6 @@
 # AutoCollect AI — Human-in-the-Loop Dunning & AR Risk Engine
 
-![AutoCollect AI Banner](docs/assets/thumbnail.png)
+![AutoCollect AI Banner](docs/assets/AutoCollect AI.png)
 
 AutoCollect AI connects machine learning credit risk models directly to daily accounts receivable (AR) follow-ups. Instead of blasting clients with generic automated emails that get ignored, AutoCollect uses a Random Forest classifier to catch high-risk invoices and pre-fill personalized email drafts so a human can review and send them in one click.
 
