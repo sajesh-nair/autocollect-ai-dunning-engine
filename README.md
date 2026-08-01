@@ -1,46 +1,42 @@
 # AutoCollect AI — Human-in-the-Loop Dunning & AR Risk Engine
 
-[<img src="./docs/assets/AutoCollect%20AI.png" width="100%" alt="AutoCollect AI Banner" />](https://github.com/sajesh-nair/autocollect-ai-dunning-engine#-%EF%B8%8F-high-level-system-architecture)
+[<img src="./docs/assets/AutoCollect%20AI.png" width="100%" alt="AutoCollect AI Dashboard" />](https://github.com/sajesh-nair/autocollect-ai-dunning-engine#high-level-system-architecture)
 
-AutoCollect AI connects machine learning credit risk models directly to daily accounts receivable (AR) follow-ups. Instead of blasting clients with generic automated emails that get ignored, AutoCollect uses a Random Forest classifier to catch high-risk invoices and pre-fill personalized email drafts so a human can review and send them in one click.
+AutoCollect AI connects machine learning credit risk models directly to daily accounts receivable (AR) follow-ups. Instead of blasting clients with generic automated emails that get ignored, AutoCollect uses a Random Forest classifier to flag high-risk invoices and pre-fill context-aware email drafts for one-click human review and dispatch.
 
 ---
 
-## ⚡ High-Level System Architecture
+## High-Level System Architecture
 
 ```mermaid
 graph LR
-    A[📄 AR Ledger CSV] --> B[🧠 Random Forest Model]
-    B -->|High Risk Flagged| C[✍️ Smart Draft Engine]
-    C --> D[👤 Human Operator Review]
-    D -->|Approve & Send| E[📬 Live Email Dispatch]
+    A[AR Ledger CSV] --> B[Random Forest Model]
+    B -->|High Risk Flagged| C[Smart Draft Engine]
+    C --> D[Human Operator Review]
+    D -->|Approve & Send| E[Live Email Dispatch]
 
     style A fill:#2d3748,stroke:#4a5568,color:#fff
     style B fill:#1a365d,stroke:#2b6cb0,color:#fff
     style C fill:#1a365d,stroke:#2b6cb0,color:#fff
     style D fill:#22543d,stroke:#38a169,color:#fff
     style E fill:#742a2a,stroke:#c53030,color:#fff
-
 ```
 
 ---
 
-## Architecture Flow
+Detailed Architecture Flow
 
-```mermaid
+```
 graph TD
-    %% Input Layer
     subgraph Input Layer
         A[AR Ledger CSV] --> B[FastAPI Ingestion]
     end
 
-    %% ML Engine
     subgraph Machine Learning Pipeline
         B --> C[Random Forest Classifier]
         C -->|Risk Score & High Risk Flag| D[Contextual Email Draft Generator]
     end
 
-    %% Application & Governance
     subgraph Dashboard & HITL
         D --> E[Tailwind CSS Dashboard]
         E --> F[Operator Review & Email Edit]
@@ -49,17 +45,16 @@ graph TD
         G -->|Approve & Send| I[SMTP Engine]
     end
 
-    %% Execution & Delivery
     subgraph Delivery
         I --> J[SMTP Server / Test Inbox Routing]
         J --> K[Real-Time Logs & State Update]
     end
 
-    %% Styling
     style A fill:#2d3748,stroke:#4a5568,color:#fff
     style C fill:#1a365d,stroke:#2b6cb0,color:#fff
     style E fill:#22543d,stroke:#38a169,color:#fff
     style I fill:#742a2a,stroke:#c53030,color:#fff
+
 
 ```
 Core Capabilities
