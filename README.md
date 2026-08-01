@@ -63,6 +63,7 @@ graph TD
 
 ```
 Core Capabilities
+
 ML Risk Scoring: Evaluates historical payment behavior using a Random Forest classifier to identify accounts with high probabilities of delay (93% accuracy).
 
 Context-Aware Email Generation: Dynamically drafts tailored dunning notices referencing specific invoice numbers, outstanding balances, and payment terms.
