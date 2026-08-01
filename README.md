@@ -41,6 +41,7 @@ graph TD
     style E fill:#1a365d,stroke:#2b6cb0,color:#fff
     style F fill:#22543d,stroke:#38a169,color:#fff
     style J fill:#742a2a,stroke:#c53030,color:#fff
+
 ```
 What It Does
 Flags Risky Invoices: Uses a Stage 1 Random Forest classifier (93% accuracy) to filter out accounts likely to pay late.
